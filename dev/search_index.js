@@ -45,7 +45,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Basics",
     "title": "Common Options",
     "category": "section",
-    "text": "Many clustering algorithms are iterative procedures. There options are usually provided to the users to control the behavior the algorithm.maxiter::Integer: maximum number of iterations.\ntol::Real: tolerable change of objective during convergence. The algorithm is considered to be converged when the change of objective value between consecutive iterations drops below this value.\ndisplay::Symbol: the level of information to be displayed. It may take one of the following values:\n:none: nothing is shown\n:final: only shows a brief summary when the algorithm ends\n:iter: shows the progress at each iteration"
+    "text": "Many clustering algorithms are iterative procedures. The function share the basic options for controlling the iterations:maxiter::Integer: maximum number of iterations.\ntol::Real: tolerable change of objective during convergence. The algorithm is considered to be converged when the change of objective value between consecutive iterations drops below this value.\ndisplay::Symbol: the level of information to be displayed. It may take one of the following values:\n:none: nothing is shown\n:final: only shows a brief summary when the algorithm ends\n:iter: shows the progress at each iteration"
 },
 
 {
