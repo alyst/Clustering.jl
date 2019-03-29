@@ -28,3 +28,7 @@ makedocs(
     ],
     debug = false,
 )
+
+deploydocs(
+    repo = "github.com/alyst/Clustering.jl.git",
+)
