@@ -45,7 +45,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Basics",
     "title": "Common Options",
     "category": "section",
-    "text": "Many clustering algorithms are iterative procedures. The function share the basic options for controlling the iterations:maxiter::Integer: maximum number of iterations.\ntol::Real: tolerable change of objective during convergence. The algorithm is considered to be converged when the change of objective value between consecutive iterations drops below this value.\ndisplay::Symbol: the level of information to be displayed. It may take one of the following values:\n:none: nothing is shown\n:final: only shows a brief summary when the algorithm ends\n:iter: shows the progress at each iteration"
+    "text": "Many clustering algorithms are iterative procedures. The functions share the basic options for controlling the iterations:maxiter::Integer: maximum number of iterations.\ntol::Real: minimal allowed change of the objective during convergence. The algorithm is considered to be converged when the change of objective value between consecutive iterations drops below tol.\ndisplay::Symbol: the level of information to be displayed. It may take one of the following values:\n:none: nothing is shown\n:final: only shows a brief summary when the algorithm ends\n:iter: shows the progress at each iteration"
 },
 
 {
@@ -157,7 +157,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Initialization",
     "title": "Clustering.initseeds",
     "category": "function",
-    "text": "initseeds(alg::Union{SeedingAlgorithm, Symbol}, X::AbstractMatrix, k::Integer)\n\nSelect k seeds from a d times n data matrix X using the alg algorithm.\n\nalg could be either an instance of SeedingAlgorithm or a symbolic name of the algorithm.\n\nReturns an integer vector of length k that contains the indices of chosen seeds.\n\n\n\n\n\n"
+    "text": "initseeds(alg::Union{SeedingAlgorithm, Symbol},\n          X::AbstractMatrix, k::Integer)\n\nSelect k seeds from a dn data matrix X using the alg algorithm.\n\nalg could be either an instance of SeedingAlgorithm or a symbolic name of the algorithm.\n\nReturns an integer vector of length k that contains the indices of chosen seeds.\n\n\n\n\n\n"
 },
 
 {
@@ -165,7 +165,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Initialization",
     "title": "Clustering.initseeds_by_costs",
     "category": "function",
-    "text": "initseeds_by_costs(alg::Union{SeedingAlgorithm, Symbol},\n                   costs::AbstractMatrix, k::Integer)\n\nSelect k seeds from the n times n costs matrix using algorithm alg.\n\nHere, mathrmcosts_ij is the cost of assigning points i and j to the same cluster. One may, for example, use the squared Euclidean distance between the points as the cost.\n\nReturns an integer vector of length k that contains the indices of chosen seeds.\n\n\n\n\n\n"
+    "text": "initseeds_by_costs(alg::Union{SeedingAlgorithm, Symbol},\n                   costs::AbstractMatrix, k::Integer)\n\nSelect k seeds from the nn costs matrix using algorithm alg.\n\nHere, mathrmcosts_ij is the cost of assigning points i and j to the same cluster. One may, for example, use the squared Euclidean distance between the points as the cost.\n\nReturns an integer vector of length k that contains the indices of chosen seeds.\n\n\n\n\n\n"
 },
 
 {
@@ -173,7 +173,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Initialization",
     "title": "Clustering.kmpp",
     "category": "function",
-    "text": "kmpp(X, k)\n\nUse Kmeans++ to choose k seeds from the d times n data matrix X.\n\n\n\n\n\n"
+    "text": "kmpp(X, k)\n\nUse Kmeans++ to choose k seeds from the dn data matrix X.\n\n\n\n\n\n"
 },
 
 {
@@ -181,7 +181,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Initialization",
     "title": "Clustering.kmpp_by_costs",
     "category": "function",
-    "text": "kmpp_by_costs(C, k)\n\nUse Kmeans++ to choose k seeds based on the n times n cost matrix C.\n\n\n\n\n\n"
+    "text": "kmpp_by_costs(C, k)\n\nUse Kmeans++ to choose k seeds based on the nn cost matrix C.\n\n\n\n\n\n"
 },
 
 {
@@ -205,7 +205,7 @@ var documenterSearchIndex = {"docs": [
     "page": "K-means",
     "title": "Clustering.kmeans",
     "category": "function",
-    "text": "kmeans(X, k, [...])\n\nK-means clustering of the d times n data matrix X (each column of X is a d-dimensional data point) into k clusters.\n\nReturns KmeansResult object.\n\nAlgorithm Options\n\ninit (defaults to :kmpp): how cluster seeds should be initialized, could be one of the following:\na Symbol, the name of a seeding algorithm (see Seeding for a list of supported methods).\nan integer vector of length k that provides the indices of points to use as initial seeds.\nweights: n-element vector of point weights (the cluster centers are the weighted means of cluster members)\nmaxiter, tol, display: see common options\n\n\n\n\n\n"
+    "text": "kmeans(X, k, [...])\n\nK-means clustering of the dn data matrix X (each column of X is a d-dimensional data point) into k clusters.\n\nReturns KmeansResult object.\n\nAlgorithm Options\n\ninit (defaults to :kmpp): how cluster seeds should be initialized, could be one of the following:\na Symbol, the name of a seeding algorithm (see Seeding for a list of supported methods).\nan integer vector of length k that provides the indices of points to use as initial seeds.\nweights: n-element vector of point weights (the cluster centers are the weighted means of cluster members)\nmaxiter, tol, display: see common options\n\n\n\n\n\n"
 },
 
 {
@@ -221,7 +221,7 @@ var documenterSearchIndex = {"docs": [
     "page": "K-means",
     "title": "Clustering.kmeans!",
     "category": "function",
-    "text": "kmeans!(X, centers; [kwargs...])\n\nUpdate the current cluster centers (d times k matrix, where d is the dimension and k the number of centroids) using the d times n data matrix X (each column of X is a d-dimensional data point).\n\nReturns KmeansResult object.\n\nSee kmeans for the description of optional kwargs.\n\n\n\n\n\n"
+    "text": "kmeans!(X, centers; [kwargs...])\n\nUpdate the current cluster centers (dk matrix, where d is the dimension and k the number of centroids) using the dn data matrix X (each column of X is a d-dimensional data point).\n\nReturns KmeansResult object.\n\nSee kmeans for the description of optional kwargs.\n\n\n\n\n\n"
 },
 
 {
@@ -253,7 +253,7 @@ var documenterSearchIndex = {"docs": [
     "page": "K-medoids",
     "title": "Clustering.kmedoids",
     "category": "function",
-    "text": "kmedoids(costs::DenseMatrix, k::Integer; ...)\n\nPerforms K-medoids clustering of n points into k clusters, given the costs matrix (n times n, mathrmcosts_ij is the cost of assigning j-th point to the mediod represented by the i-th point).\n\nReturns an object of type KmedoidsResult.\n\nNote\n\nThis package implements a K-means style algorithm instead of PAM, which is considered to be much more efficient and reliable.\n\nAlgorithm Options\n\ninit (defaults to :kmpp): how medoids should be initialized, could be one of the following:\na Symbol indicating the name of a seeding algorithm (see Seeding for a list of supported methods).\nan integer vector of length k that provides the indices of points to use as initial medoids.\nmaxiter, tol, display: see common options\n\n\n\n\n\n"
+    "text": "kmedoids(costs::DenseMatrix, k::Integer; ...)\n\nPerforms K-medoids clustering of n points into k clusters, given the costs matrix (nn, mathrmcosts_ij is the cost of assigning j-th point to the mediod represented by the i-th point).\n\nReturns an object of type KmedoidsResult.\n\nNote\n\nThis package implements a K-means style algorithm instead of PAM, which is considered much more efficient and reliable.\n\nAlgorithm Options\n\ninit (defaults to :kmpp): how medoids should be initialized, could be one of the following:\na Symbol indicating the name of a seeding algorithm (see Seeding for a list of supported methods).\nan integer vector of length k that provides the indices of points to use as initial medoids.\nmaxiter, tol, display: see common options\n\n\n\n\n\n"
 },
 
 {
@@ -301,7 +301,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Hierarchical Clustering",
     "title": "Clustering.Hclust",
     "category": "type",
-    "text": "The output of hclust, hierarchical clustering of data points.\n\nProvides the bottom-up definition of the dendrogram as the sequence of merges of the two lower subtrees into a higher level subtree.\n\nThis type mostly follows R\'s hclust class.\n\nFields\n\nmerges::Matrix{Int}: N times 2 matrix encoding subtree merges:\neach row specifies the left and right subtrees (referenced by their ids) that are merged\nnegative subtree id denotes the leaf node and corresponds to the data point at position -id\npositive id denotes nontrivial subtree (the row merges[id, :] specifies its left and right subtrees)\nlinkage::Symbol: the name of cluster linkage function used to construct the hierarchy (see hclust)\nheights::Vector{T}: subtree heights, i.e. the distances between the left  and right branches of each subtree calculated using the specified linkage\norder::Vector{Int}: the data point indices ordered so that there are no  intersecting branches on the dendrogram plot. This ordering also puts  the points of the same cluster close together.\n\nSee also: hclust.\n\n\n\n\n\n"
+    "text": "The output of hclust, hierarchical clustering of data points.\n\nProvides the bottom-up definition of the dendrogram as the sequence of merges of the two lower subtrees into a higher level subtree.\n\nThis type mostly follows R\'s hclust class.\n\nFields\n\nmerges::Matrix{Int}: N2 matrix encoding subtree merges:\neach row specifies the left and right subtrees (referenced by their ids) that are merged\nnegative subtree id denotes the leaf node and corresponds to the data point at position -id\npositive id denotes nontrivial subtree (the row merges[id, :] specifies its left and right subtrees)\nlinkage::Symbol: the name of cluster linkage function used to construct the hierarchy (see hclust)\nheights::Vector{T}: subtree heights, i.e. the distances between the left  and right branches of each subtree calculated using the specified linkage\norder::Vector{Int}: the data point indices ordered so that there are no  intersecting branches on the dendrogram plot. This ordering also puts  the points of the same cluster close together.\n\nSee also: hclust.\n\n\n\n\n\n"
 },
 
 {
@@ -309,7 +309,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Hierarchical Clustering",
     "title": "Clustering.cutree",
     "category": "function",
-    "text": "cutree(hclu::Hclust; [k], [h])\n\nCuts the hclu dendrogram to produce clusters at the specified level of granularity.\n\nReturns the cluster assignments vector z (z_i is the index of the cluster for the i-th data point).\n\nArguments\n\nk::Integer (optional) the number of desired clusters.\nh::Real (optional) the height at which the tree is cut.\n\nIf both k and h are specified, it\'s guaranteed that the number of clusters is ge k and their height le h.\n\nSee also: hclust\n\n\n\n\n\n"
+    "text": "cutree(hclu::Hclust; [k], [h])\n\nCuts the hclu dendrogram to produce clusters at the specified level of granularity.\n\nReturns the cluster assignments vector z (z_i is the index of the cluster for the i-th data point).\n\nArguments\n\nk::Integer (optional) the number of desired clusters.\nh::Real (optional) the height at which the tree is cut.\n\nIf both k and h are specified, it\'s guaranteed that the number of clusters is not less than k and their height is not above h.\n\nSee also: hclust\n\n\n\n\n\n"
 },
 
 {
@@ -333,7 +333,7 @@ var documenterSearchIndex = {"docs": [
     "page": "MCL (Markov Cluster Algorithm)",
     "title": "Clustering.mcl",
     "category": "function",
-    "text": "mcl(adj::AbstractMatrix; [kwargs...])\n\nPerform MCL (Markov Cluster Algorithm) clustering using n times n adjacency (points similarity) matrix adj.\n\nReturns MCLResult object.\n\nAlgorithm Options\n\nadd_loops::Bool (enabled by default): whether the edges of weight 1.0 from the node to itself should be appended to the graph\nexpansion::Number (defaults to 2): MCL expansion constant\ninflation::Number (defaults to 2): MCL inflation constant\nsave_final_matrix::Bool (disabled by default): whether to save the final equilibrium state in the mcl_adj field of the result; could provide useful diagnostic if the method doesn\'t converge\nprune_tol::Number: pruning threshold\ndisplay::Symbol (defaults to :none): :none for no output or :verbose for diagnostic messages\nmax_iter, tol: see common options\n\nReferences\n\nStijn van Dongen, \"Graph clustering by flow simulation\", 2001\n\nOriginal MCL implementation.\n\n\n\n\n\n"
+    "text": "mcl(adj::AbstractMatrix; [kwargs...])\n\nPerform MCL (Markov Cluster Algorithm) clustering using nn adjacency (points similarity) matrix adj.\n\nReturns MCLResult object.\n\nAlgorithm Options\n\nadd_loops::Bool (enabled by default): whether the edges of weight 1.0 from the node to itself should be appended to the graph\nexpansion::Number (defaults to 2): MCL expansion constant\ninflation::Number (defaults to 2): MCL inflation constant\nsave_final_matrix::Bool (disabled by default): whether to save the final equilibrium state in the mcl_adj field of the result; could provide useful diagnostic if the method doesn\'t converge\nprune_tol::Number: pruning threshold\ndisplay::Symbol (defaults to :none): :none for no output or :verbose for diagnostic messages\nmax_iter, tol: see common options\n\nReferences\n\nStijn van Dongen, \"Graph clustering by flow simulation\", 2001\n\nOriginal MCL implementation.\n\n\n\n\n\n"
 },
 
 {
@@ -349,7 +349,7 @@ var documenterSearchIndex = {"docs": [
     "page": "MCL (Markov Cluster Algorithm)",
     "title": "MCL (Markov Cluster Algorithm)",
     "category": "section",
-    "text": "Markov Cluster Algorithm works by simulating a stochastic (Markov) flow in a weighted graph, where each node is a data point, and the edge weights are defined by the adjacency matrix. TODO: more When the algorithm converges, it produces the new edge weights that define the new connected components of the graph (i.e. the clusters).mcl\nMCLResult"
+    "text": "Markov Cluster Algorithm works by simulating a stochastic (Markov) flow in a weighted graph, where each node is a data point, and the edge weights are defined by the adjacency matrix. ... When the algorithm converges, it produces the new edge weights that define the new connected components of the graph (i.e. the clusters).mcl\nMCLResult"
 },
 
 {
@@ -365,7 +365,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Affinity Propagation",
     "title": "Clustering.affinityprop",
     "category": "function",
-    "text": "affinityprop(S::DenseMatrix; [maxiter=200], [tol=1e-6], [damp=0.5],\n             [display=:none])\n\nPerform affinity propagation clustering based on a similarity matrix S.\n\nS_ij (i ne j) is the similarity (or the negated distance) between the i-th and j-th points, S_ii defines the availability of the i-th point as an exemplar.\n\nReturns an instance of AffinityPropResult.\n\nMethod parameters\n\ndamp::Real: the dampening coefficient, 0 le mathrmdamp  1. Larger values indicate slower (and probably more stable) update. mathrmdamp = 0 disables dampening.\nmaxiter, tol, display: see common options\n\nNotes\n\nThe implementations is based on the following paper:\n\nBrendan J. Frey and Delbert Dueck. Clustering by Passing Messages Between Data Points. Science, vol 315, pages 972-976, 2007.\n\n\n\n\n\n"
+    "text": "affinityprop(S::DenseMatrix; [maxiter=200], [tol=1e-6], [damp=0.5],\n             [display=:none])\n\nPerform affinity propagation clustering based on a similarity matrix S.\n\nS_ij (i  j) is the similarity (or the negated distance) between the i-th and j-th points, S_ii defines the availability of the i-th point as an exemplar.\n\nReturns an instance of AffinityPropResult.\n\nMethod parameters\n\ndamp::Real: the dampening coefficient, 0  mathrmdamp  1. Larger values indicate slower (and probably more stable) update. mathrmdamp = 0 disables dampening.\nmaxiter, tol, display: see common options\n\nNotes\n\nThe implementations is based on the following paper:\n\nBrendan J. Frey and Delbert Dueck. Clustering by Passing Messages Between Data Points. Science, vol 315, pages 972-976, 2007.\n\n\n\n\n\n"
 },
 
 {
@@ -413,7 +413,7 @@ var documenterSearchIndex = {"docs": [
     "page": "DBSCAN",
     "title": "Clustering.dbscan",
     "category": "function",
-    "text": "dbscan(D::DenseMatrix, eps::Real, minpts::Int)\n\nPerform DBSCAN algorithm using the distance matrix D.\n\nReturns an instance of DbscanResult.\n\nAlgorithm Options\n\nThe following options control which points would be considered density reachable:\n\neps::Real: the radius of a point neighborhood\nminpts::Int: the minimum number of neighboring points (including itself)  to qualify a point as a density point.\n\n\n\n\n\ndbscan(points::AbstractMatrix, radius::Real; leafsize = 20, min_neighbors = 1, min_cluster_size = 1) -> clusters\n\nCluster points using the DBSCAN (density-based spatial clustering of applications with noise) algorithm.\n\nReturns the clustering as a vector of DbscanCluster objects.\n\nArguments\n\npoints: the d times n matrix of points. j-th column contains d-dimensional coordinates of j-th point\nradius::Real: query radius\n\nAdditional keyword options to control the algorithm:\n\nleafsize::Int (defaults to 20): the number of points binned in each leaf node in the KDTree\nmin_neighbors::Int (defaults to 1): the minimum number of a core point neighbors\nmin_cluster_size::Int (defaults to 1): the minimum number of points in a valid cluster\n\nExample:\n\npoints = randn(3, 10000)\n# DBSCAN clustering, clusters with less than 20 points will be discarded:\nclusters = dbscan(points, 0.05, min_neighbors = 3, min_cluster_size = 20)\n\n\n\n\n\n"
+    "text": "dbscan(D::DenseMatrix, eps::Real, minpts::Int)\n\nPerform DBSCAN algorithm using the distance matrix D.\n\nReturns an instance of DbscanResult.\n\nAlgorithm Options\n\nThe following options control which points would be considered density reachable:\n\neps::Real: the radius of a point neighborhood\nminpts::Int: the minimum number of neighboring points (including itself)  to qualify a point as a density point.\n\n\n\n\n\ndbscan(points::AbstractMatrix, radius::Real;\n       leafsize = 20, min_neighbors = 1, min_cluster_size = 1)\n\nCluster points using the DBSCAN (density-based spatial clustering of applications with noise) algorithm.\n\nReturns the clustering as a vector of DbscanCluster objects.\n\nArguments\n\npoints: the dn matrix of points. points[:, j] is a d-dimensional coordinates of j-th point\nradius::Real: query radius\n\nAdditional keyword options to control the algorithm:\n\nleafsize::Int (defaults to 20): the number of points binned in each leaf node in the KDTree\nmin_neighbors::Int (defaults to 1): the minimum number of a core point neighbors\nmin_cluster_size::Int (defaults to 1): the minimum number of points in a valid cluster\n\nExample:\n\npoints = randn(3, 10000)\n# DBSCAN clustering, clusters with less than 20 points will be discarded:\nclusters = dbscan(points, 0.05, min_neighbors = 3, min_cluster_size = 20)\n\n\n\n\n\n"
 },
 
 {
@@ -453,7 +453,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Fuzzy C-means",
     "title": "Clustering.fuzzy_cmeans",
     "category": "function",
-    "text": "fuzzy_cmeans(data::AbstractMatrix, C::Int, fuzziness::Real; [...])\n\nPerforms Fuzzy C-means clustering over the given data.\n\nReturns an instance of FuzzyCMeansResult.\n\nArguments\n\ndata::AbstractMatrix: d times n data matrix. Each column represents on d-dimensional data point.\nC::Int: the number of fuzzy clusters, 2 le C  n.\nfuzziness::Real: clusters fuzziness (see m in the mathematical formulation), mathrmfuzziness  1.\n\nOne may also control the algorithm via the following optional keyword arguments:\n\ndist_metric::Metric (defaults to Euclidean): the Metric object  that defines the distance between the data points\nmaxiter, tol, display: see common options\n\n\n\n\n\n"
+    "text": "fuzzy_cmeans(data::AbstractMatrix, C::Int, fuzziness::Real; [...])\n\nPerforms Fuzzy C-means clustering over the given data.\n\nReturns an instance of FuzzyCMeansResult.\n\nArguments\n\ndata::AbstractMatrix: dn data matrix. Each column represents one d-dimensional data point.\nC::Int: the number of fuzzy clusters, 2  C  n.\nfuzziness::Real: clusters fuzziness (see m in the mathematical formulation), mathrmfuzziness  1.\n\nOne may also control the algorithm via the following optional keyword arguments:\n\ndist_metric::Metric (defaults to Euclidean): the Metric object  that defines the distance between the data points\nmaxiter, tol, display: see common options\n\n\n\n\n\n"
 },
 
 {
@@ -461,7 +461,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Fuzzy C-means",
     "title": "Clustering.FuzzyCMeansResult",
     "category": "type",
-    "text": "The output of fuzzy_cmeans function.\n\nFields\n\ncenters::Matrix{T}: the d times C matrix with columns being the centers of resulting fuzzy clusters\nweights::Matrix{Float64}: the n times C matrix of assignment weights (mathrmweights_ij is the weight (probability) of assigning i-th point to the j-th cluster)\niterations::Int: the number of executed algorithm iterations\nconverged::Bool: whether the procedure converged\n\n\n\n\n\n"
+    "text": "The output of fuzzy_cmeans function.\n\nFields\n\ncenters::Matrix{T}: the dC matrix with columns being the centers of resulting fuzzy clusters\nweights::Matrix{Float64}: the nC matrix of assignment weights (mathrmweights_ij is the weight (probability) of assigning i-th point to the j-th cluster)\niterations::Int: the number of executed algorithm iterations\nconverged::Bool: whether the procedure converged\n\n\n\n\n\n"
 },
 
 {
@@ -509,7 +509,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Silhouettes",
     "title": "Clustering.silhouettes",
     "category": "function",
-    "text": "silhouettes(assignments::AbstractVector, [counts,] dists)\nsilhouettes(clustering::ClusteringResult, dists)\n\nCompute silhouette values for individual points w.r.t. given clustering.\n\nReturns the n-length vector of silhouette values for each individual point.\n\nArguments\n\nassignments::AbstractVector{Int}: the vector of point assignments (cluster indices)\ncounts::AbstractVector{Int}: the optional vector of cluster sizes (how many points assigned to each cluster; should match assignments)\nclustering::ClusteringResult: the output of some clustering method\ndists::AbstractMatrix: n times n matrix of pairwise distances between the points\n\n\n\n\n\n"
+    "text": "silhouettes(assignments::AbstractVector, [counts,] dists)\nsilhouettes(clustering::ClusteringResult, dists)\n\nCompute silhouette values for individual points w.r.t. given clustering.\n\nReturns the n-length vector of silhouette values for each individual point.\n\nArguments\n\nassignments::AbstractVector{Int}: the vector of point assignments (cluster indices)\ncounts::AbstractVector{Int}: the optional vector of cluster sizes (how many points assigned to each cluster; should match assignments)\nclustering::ClusteringResult: the output of some clustering method\ndists::AbstractMatrix: nn matrix of pairwise distances between the points\n\n\n\n\n\n"
 },
 
 {
@@ -517,7 +517,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Silhouettes",
     "title": "Silhouettes",
     "category": "section",
-    "text": "Silhouettes is a method for evaluating the quality of clustering. Particularly, it provides a quantitative way to measure how well each point lies within its cluster in comparison to the other clusters. It was introduced inPeter J. Rousseeuw (1987). Silhouettes: a Graphical Aid to the Interpretation and Validation of Cluster Analysis. Computational and Applied Mathematics. 20: 53–65.The Silhouette value for the i-th data point is:s_i = fracb_i - a_imax(a_i b_i)  textwherea_i is the average distance from the i-th point to the other points in the same cluster z_i,\nb_i  min_k ne z_i b_ik, where b_ik is the average distance from the i-th point to the points in the k-th cluster.Note that s_i le 1, and that s_i is close to 1 when the i-th point lies well within its own cluster. This property allows using mean(silhouettes(...)) as a measure of clustering quality. Higher values indicate better separation of clusters w.r.t. point distances.silhouettes"
+    "text": "Silhouettes is a method for evaluating the quality of clustering. Particularly, it provides a quantitative way to measure how well each point lies within its cluster in comparison to the other clusters. It was introduced inPeter J. Rousseeuw (1987). Silhouettes: a Graphical Aid to the Interpretation and Validation of Cluster Analysis. Computational and Applied Mathematics. 20: 53–65.The Silhouette value for the i-th data point is:s_i = fracb_i - a_imax(a_i b_i)  textwherea_i is the average distance from the i-th point to the other points in the same cluster z_i,\nb_i  min_k ne z_i b_ik, where b_ik is the average distance from the i-th point to the points in the k-th cluster.Note that s_i le 1, and that s_i is close to 1 when the i-th point lies well within its own cluster. This property allows using mean(silhouettes(assignments, counts, X)) as a measure of clustering quality. Higher values indicate better separation of clusters w.r.t. point distances.silhouettes"
 },
 
 {
@@ -581,7 +581,7 @@ var documenterSearchIndex = {"docs": [
     "page": "V-measure",
     "title": "Clustering.vmeasure",
     "category": "function",
-    "text": "vmeasure(assign1, assign2; [β = 1.0])\n\nV-measure between two clustering assignments.\n\nassign1 and assign2 can be either ClusteringResult instances or assignments vectors (AbstractVector{<:Integer}).\n\nThe β parameter defines trade-off between homogeneity and completeness:\n\nif β is greater than 1, completeness is weighted more strongly,\nif β is less than 1, homogeneity is weighted more strongly.\n\nReferences\n\nAndrew Rosenberg and Julia Hirschberg, 2007. \"V-Measure: A conditional entropy-based external cluster evaluation measure\"\n\n\n\n\n\n"
+    "text": "vmeasure(assign1, assign2; [β = 1.0])\n\nV-measure between two clustering assignments.\n\nassign1 and assign2 can be either ClusteringResult instances or assignments vectors (AbstractVector{<:Integer}).\n\nThe β parameter defines trade-off between homogeneity and completeness:\n\nif β  1, completeness is weighted more strongly,\nif β  1, homogeneity is weighted more strongly.\n\nReferences\n\nAndrew Rosenberg and Julia Hirschberg, 2007. \"V-Measure: A conditional entropy-based external cluster evaluation measure\"\n\n\n\n\n\n"
 },
 
 {
